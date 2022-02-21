@@ -4,31 +4,21 @@
 _get_repolink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $DRAGON_REPO == "DRAGONBOT" ]]
+    if [[ $PYTHON_REPO == "PYTHONBOT" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORC1MWC9QWVRIT05VU0VSQk9UL2FyY2hpdmUvbWFpbi56aXA" | base64 -d
-    elif [[ $DRAGON_REPO == "DRAGONBOT" ]]
+    elif [[ $PYTHON_REPO == "PYTHONBOT" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORC1MWC9QWVRIT05VU0VSQk9UL2FyY2hpdmUvbWFpbi56aXA" | base64 -d
-    elif [[ $DRAGON_REPO =~ $regex ]]
+    elif [[ $PYTHON_REPO =~ $regex ]]
     then
-        if [[ $DRAGON_REPO_BRANCH ]]
+        if [[ $PYTHON_REPO_BRANCH ]]
         then
-            echo "${DRAGON_REPO}/archive/${DRAGON_REPO_BRANCH}.zip"
+            echo "${PYTHON_REPO}/archive/${PYTHON_REPO_BRANCH}.zip"
         else
-            echo "${DRAGON_REPO}/archive/master.zip"
+            echo "${PYTHON_REPO}/archive/master.zip"
         fi
     else
-        echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORC1MWC9QWVRIT05VU0VSQk9UL2FyY2hpdmUvbWFpbi56aXA" | base64
-    elif [[$MUSIC_REPO =~ $regex ]]
-       then
-       if [[MUSIC_REPO_BRANCH ]]
-       then
-         echo '${DRAGON_REPO}/archive/$[MUSIC_REPO_BRANCH].zip"
-         fi
-    else   
-       echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORC1MWC9QWVRIT05VU0VSQk9UL2FyY2hpdmUvbWFpbi56aXA" | base64
-           
         echo "aHR0cHM6Ly9naXRodWIuY29tL0xFR0VORC1MWC9QWVRIT05VU0VSQk9UL2FyY2hpdmUvbWFpbi56aXA" | base64 -d
     fi
 }
@@ -37,19 +27,19 @@ _get_repolink () {
 _set_bot () {
     local zippath
     zippath="PYTHONBOT.zip"
-    echo "  Downloading 💥💫DragonBot~Pro💫💥 Source Code..."
+    echo "  Downloading 💥💫PythonBot~Pro💫💥 Source Code..."
     wget -q $(_get_repolink) -O "$zippath"
     echo "  Unpacking Data ..."
     PYTHONPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
-    echo "  💥💫DragonBot~Pro💫💥 Cleaning.."
+    echo "  💥💫PythonBot~Pro💫💥 Cleaning.."
     rm -rf "$zippath"
     sleep 5
     cd $PYTHONPATH
-    echo "   ✨☄️ ѕταяτιиg ѕмοοτнєѕτ 💥💫Dragon𝕭ø𝖙💫💥 ✨☄️     "
+    echo "   ✨☄️ ѕταяτιиg ѕмοοτнєѕτ 💥💫Python𝕭ø𝖙💫💥 ✨☄️     "
     echo "
-    DRAGONBOT
+    PYTHONBOT
     "
 
     python3 ../setup/updater.py ../requirements.txt requirements.txt
